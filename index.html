@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Consultas Odontológicas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Logo" id="logo">
+        <h1>Agendamento de Consultas Odontológicas</h1>
+    </header>
+    <main>
+        <div id="feedback" style="display: none;"></div>
+        <form id="appointment-form">
+            <label for="type">Tipo de Agendamento: <span class="required">*</span></label>
+            <select id="type" name="type" required onchange="toggleFields()">
+                <option value="">Selecione uma opção</option>
+                <option value="laboratorio">Laboratório</option>
+                <option value="consultorio">Consultório</option>
+            </select>
+
+            <div id="details" style="display:none;">
+                <label for="name">Nome: <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">Telefone: <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required pattern="\d{8,13}" placeholder="Digite o telefone">
+
+                <label for="date">Data: <span class="required">*</span></label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Hora: <span class="required">*</span></label>
+                <select id="time" name="time" required>
+                    <option value="">Selecione um horário</option>
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                </select>
+
+                <div id="service-field">
+                    <label for="service">Serviço: <span class="required">*</span></label>
+                    <select id="service" name="service">
+                        <option value="">Selecione um serviço</option>
+                        <!-- Adicione suas opções de serviço aqui -->
+                        <option value="coroa-total-ceramica-pura-injetada">Coroa Total Cerâmica Pura (Emax) Injetada - R$400,00</option>
+                        <option value="coroa-total-ceramica-pura-fresada">Coroa Total Cerâmica Pura (Emax) Fresada - R$450,00</option>
+                        <option value="coroa-onlay-inlay-ceramica-pura-injetada">Coroa Onlay/Inlay Cerâmica Pura (Emax) Injetada - R$400,00</option>
+                        <option value="coroa-onlay-inlay-ceramica-pura-fresada">Coroa Onlay/Inlay Cerâmica Pura (Emax) Fresada - R$450,00</option>
+                        <option value="lente-contato-facetas-disilicato-litio-fresada">Lente de Contato/Facetas Dissilicato de Lítio Fresada - R$470,00</option>
+                        <option value="coroa-total-zirconia-dente">Coroa Total Zircônia Sobre Dente - R$350,00</option>
+                        <option value="coroa-total-zirconia-implante">Coroa Total Zircônia Sobre Implante - R$350,00</option>
+                        <option value="protocolo-ceramico-zirconia">Protocolo Cerâmico de Zircônia - R$5.500,00</option>
+                        <option value="aplicacao-gengiva-artificial">Aplicação de Gengiva Artificial - R$60,00</option>
+                        <option value="coroa-total-ceromero">Coroa Total Cerômero - R$200,00</option>
+                        <option value="coroa-onlay-inlay-ceromero">Coroa Onlay/Inlay Cerômero - R$200,00</option>
+                        <option value="coroa-provisoria">Coroa Provisória - R$100,00</option>
+                        <option value="coroa-total-metaloceramica-preparo">Coroa Total Metalocerâmica Sobre Preparo - R$300,00</option>
+                        <option value="coroa-total-metaloceramica-implante">Coroa Total Metalocerâmica Sobre Implante - R$310,00</option>
+                        <option value="protocolo-metaloceramico">Protocolo Metalocerâmico - R$ a combinar</option>
+                        <option value="protese-total-simples">Prótese Total Simples (Provisória) - R$320,00</option>
+                        <option value="protese-total-palato-incolor">Prótese Total Palato Incolor - R$380,00</option>
+                        <option value="protese-total-caracterizada">Prótese Total Caracterizada - R$500,00</option>
+                        <option value="protese-parcial-removivel">Prótese Parcial Removível - R$600,00</option>
+                        <option value="protese-parcial-removivel-provisoria">Prótese Parcial Removível Provisória - R$320,00</option>
+                        <option value="protese-parcial-removivel-flexivel">Prótese Parcial Removível Flexível - R$1.100,00</option>
+                        <option value="protese-overdenture">Prótese Overdenture - R$800,00</option>
+                        <option value="protese-protocolo-acrilico-metalica">Prótese Protocolo Acrílico com Estrutura Metálica - R$1.400,00</option>
+                        <option value="protese-protocolo-acrilico-fresado-provisoria">Prótese Protocolo Acrílico Fresado Provisória - R$ a combinar</option>
+                        <option value="placa-silicone">Placa em Silicone - R$80,00</option>
+                        <option value="placa-acetato">Placa em Acetato - R$150,00</option>
+                        <option value="placa-acrilica-prensada">Placa Acrílica Prensada - R$300,00</option>
+                        <option value="placa-acrilica-impressa">Placa Acrílica Impressa - R$310,00</option>
+                        <option value="enceramento-diagnostico-impresso">Enceramento Diagnóstico Impresso (elemento) - R$60,00</option>
+                        <option value="nucleo-metalico-fundido">Núcleo Metálico Fundido - R$80,00</option>
+                        <option value="restauracao-metalica-fundida">Restauração Metálica Fundida - R$200,00</option>
+                        <option value="solda">Solda - R$70,00</option>
+                        <option value="conserto-proteses-removiveis">Conserto Próteses Removíveis - R$100,00</option>
+                        <option value="reembasamento-proteses">Reembasamento Próteses - R$200,00</option>
+                        <option value="escaneamento-arquivo">Escaneamento para Envio do Arquivo - R$250,00</option>
+                    </select>
+                </div>
+
+                <label for="payment">Forma de Pagamento: <span class="required">*</span></label>
+                <select id="payment" name="payment" required>
+                    <option value="">Selecione uma forma de pagamento</option>
+                    <option value="credito">Crédito</option>
+                    <option value="debito">Débito</option>
+                    <option value="pix">Pix</option>
+                    <option value="dinheiro">Dinheiro</option>
+                </select>
+
+                <button type="submit">Agendar</button>
+            </div>
+        </form>
+        <button onclick="window.location.href='agendados.html'" class="btn-view-appointments">Ver Pacientes Agendados</button>
+        <button id="delete-today-appointments" onclick="deleteTodayAppointments()" disabled>Apagar Agendamentos de Hoje</button>
+    </main>
+    <script>
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.className = type;
+            feedback.innerText = message;
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 5000);
+        }
+
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const type = document.getElementById('type').value;
+            const service = document.getElementById('service').value || 'N/A';
+            const payment = document.getElementById('payment').value;
+
+            if (name === "" || phone === "" || date === "" || time === "" || type === "" || payment === "" || (type === "laboratorio" && service === "N/A")) {
+                showFeedback("Por favor, preencha todos os campos obrigatórios.", 'error');
+                return;
+            }
+
+            if (!isValidPhone(phone)) {
+                showFeedback("Por favor, insira um número de telefone válido.", 'error');
+                return;
+            }
+
+            const appointment = { name, phone, date, time, type, service, payment };
+
+            if (isDuplicate(appointment)) {
+                showFeedback("Agendamento duplicado. Por favor, escolha um horário diferente.", 'error');
+                return;
+            }
+
+            saveAppointment(appointment);
+
+            showFeedback('Consulta agendada com sucesso!', 'success');
+            document.getElementById('appointment-form').reset();
+            document.getElementById('details').style.display = 'none';
+        });
+
+        function toggleFields() {
+            const type = document.getElementById('type').value;
+            const details = document.getElementById('details');
+            const serviceField = document.getElementById('service-field');
+
+            if (type === 'consultorio') {
+                serviceField.style.display = 'none';
+                document.getElementById('service').removeAttribute('required');
+            } else {
+                serviceField.style.display = 'block';
+                document.getElementById('service').setAttribute('required', 'required');
+            }
+
+            details.style.display = type ? 'block' : 'none';
+        }
+
+        function saveAppointment(appointment) {
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+        }
+
+        function isDuplicate(newAppointment) {
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            return appointments.some(appointment =>
+                appointment.date === newAppointment.date &&
+                appointment.time === newAppointment.time &&
+                appointment.type === newAppointment.type &&
+                appointment.service === newAppointment.service &&
+                appointment.payment === newAppointment.payment
+            );
+        }
+
+        function isValidPhone(phone) {
+            const phonePattern = /^\d{8,13}$/;
+            return phonePattern.test(phone);
+        }
+
+        function checkTimeForDeleteButton() {
+            const currentTime = new Date();
+            const hours = currentTime.getHours();
+            const deleteButton = document.getElementById('delete-today-appointments');
+            if (hours >= 17) {
+                deleteButton.removeAttribute('disabled');
+            } else {
+                deleteButton.setAttribute('disabled', 'true');
+            }
+        }
+
+        function deleteTodayAppointments() {
+            const today = new Date().toISOString().split('T')[0];
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments = appointments.filter(appointment => appointment.date !== today);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            showFeedback('Todos os agendamentos de hoje foram apagados.', 'success');
+        }
+
+        checkTimeForDeleteButton();
+        setInterval(checkTimeForDeleteButton, 60000); // Verifica a cada minuto
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes Agendados</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/agendados.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Logo" id="logo">
+        <h1>Pacientes Agendados</h1>
+    </header>
+    <main>
+        <input type="text" id="filter" placeholder="Filtrar pacientes..." onkeyup="filterAppointments()">
+        <table id="appointments-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Tipo</th>
+                    <th>Serviço</th>
+                    <th>Pagamento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados dos pacientes agendados serão inseridos aqui -->
+            </tbody>
+        </table>
+        <button onclick="window.location.href='index.html'" class="btn-back">Voltar ao Agendamento</button>
+    </main>
+    <script src="js/agendados.js"></script>
+</body>
+</html>
