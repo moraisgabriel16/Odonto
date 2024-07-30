@@ -12,7 +12,7 @@
         <h1>Agendamento de Consultas Odontológicas</h1>
     </header>
     <main>
-        <div id="feedback" style="display: none;"></div>
+        <div id="feedback" class="feedback"></div>
         <form id="appointment-form">
             <label for="type">Tipo de Agendamento: <span class="required">*</span></label>
             <select id="type" name="type" required onchange="toggleFields()">
@@ -111,9 +111,15 @@
                 <button type="submit">Agendar</button>
             </div>
         </form>
-        <button onclick="window.location.href='agendados.html'" class="btn-view-appointments">Ver Pacientes Agendados</button>
-        <button id="delete-today-appointments" onclick="deleteTodayAppointments()" disabled>Apagar Agendamentos de Hoje</button>
+        <div class="btn-group">
+            <button onclick="window.location.href='agendados.html'" class="btn-view-appointments">Ver Pacientes Agendados</button>
+            <button id="delete-today-appointments" onclick="deleteTodayAppointments()" disabled>Apagar Agendamentos de Hoje</button>
+            <button onclick="exportAppointments()" class="export-import-btn">Exportar Agendamentos</button>
+            <input type="file" id="file-input" style="display: none;" onchange="importAppointments(event)">
+            <button onclick="document.getElementById('file-input').click()" class="export-import-btn">Importar Agendamentos</button>
+        </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script>
         function showFeedback(message, type) {
             const feedback = document.getElementById('feedback');
@@ -215,6 +221,38 @@
             appointments = appointments.filter(appointment => appointment.date !== today);
             localStorage.setItem('appointments', JSON.stringify(appointments));
             showFeedback('Todos os agendamentos de hoje foram apagados.', 'success');
+        }
+
+        function exportAppointments() {
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            if (appointments.length === 0) {
+                showFeedback('Nenhum agendamento para exportar.', 'error');
+                return;
+            }
+
+            const worksheet = XLSX.utils.json_to_sheet(appointments);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Agendamentos");
+
+            XLSX.writeFile(workbook, "agendamentos.xlsx");
+        }
+
+        function importAppointments(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const appointments = XLSX.utils.sheet_to_json(worksheet);
+
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                showFeedback('Agendamentos importados com sucesso!', 'success');
+            };
+
+            reader.readAsArrayBuffer(file);
         }
 
         checkTimeForDeleteButton();
